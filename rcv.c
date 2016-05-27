@@ -36,13 +36,17 @@ if( msgrcv(msgid,&elem, 40, 123, 0) == -1){
 	}*/
 
 	k=0;
+	if((slowo[0]>='a'&& slowo[0]<='z')||(slowo[0]>='A'&& slowo[0]<='Z')){
 	while(k<j && poprawny){
 		if(slowo[k]>=0 && slowo[k]<=127)
 			poprawny=true;
 		else
 			poprawny=false;
 	k++;
-	}
+	}}
+	else 
+		poprawny=false;
+
 	if(poprawny)
 		fprintf(stdout, slowo);
 	else
