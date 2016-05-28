@@ -23,13 +23,13 @@ int main(){
 	
 	int msgid,msgid2;
 	struct buf_elem elem;
-	elem.mtype=123;
+	elem.mtype=445;
 	
 	int j;	
 	for(j=0;j<40;j++){
 		elem.mvalue[j]=z[j];
 	}
-	printf("%c",elem.mvalue[i-2]);
+	
 	msgid = msgget(51212, IPC_CREAT|IPC_EXCL|0600);
 	if (msgid == -1){
 		msgid = msgget(51212, IPC_CREAT|0600);

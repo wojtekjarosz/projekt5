@@ -14,7 +14,7 @@ struct buf_elem {
 int main(){
 struct buf_elem elem;
 int msgid = msgget(51212, IPC_EXCL);
-if( msgrcv(msgid,&elem, 40, 123, 0) == -1){
+if( msgrcv(msgid,&elem, 40, 445, 0) == -1){
 	perror("Odbieranie komunikatu");
 	exit(1);
 	}
@@ -30,12 +30,9 @@ if( msgrcv(msgid,&elem, 40, 123, 0) == -1){
 	for(k=0;k<j;k++){
 		slowo[k]=elem.mvalue[k];
 	}
-	/*	
-	for(k=0;k<j;k++){
-		printf("%c", slowo[k]);
-	}*/
+	
 
-	k=0;
+	k=1;
 	if((slowo[0]>='a'&& slowo[0]<='z')||(slowo[0]>='A'&& slowo[0]<='Z')){
 	while(k<j && poprawny){
 		if(slowo[k]>=0 && slowo[k]<=127)
@@ -48,8 +45,13 @@ if( msgrcv(msgid,&elem, 40, 123, 0) == -1){
 		poprawny=false;
 
 	if(poprawny)
-		fprintf(stdout, slowo);
+		printf("%s", slowo);
 	else
-		printf("KOMUNIKAT NIEPRAWNY");
+		printf("KOMUNIKAT NIEPOPRAWNY");
 	free(slowo);
+
+	if (msgctl(msgid, IPC_RMID, NULL) == -1){
+			perror("Usuwanie kolejki");
+		}
+
 }
